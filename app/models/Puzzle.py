@@ -44,5 +44,5 @@ class Puzzle(db.Model):
         result = db.session.query(Puzzle.input) \
             .filter(Puzzle.date == puzzle_date) \
             .first()
-        return result[0] if result else None
+        return result[0].strip() if result else None
 

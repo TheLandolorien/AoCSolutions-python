@@ -25,6 +25,11 @@ class Development(Config):
     GITHUB_USERNAME = config['GITHUB_USERNAME']
 
 
+class Testing(Config):
+    TESTING = True
+    DEBUG = True
+
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(WORKING_DIR, 'data-dev.sqlite')
 
 class Predix(Config):
     if os.getenv('VCAP_SERVICES'):

@@ -74,3 +74,10 @@ flask run
 **NOTE**: `FLASK_APP` will still need to be set in order to avoid errors.
 
 Navigate to [localhost:5000](http://localhost:5000) to select puzzle solutions.
+
+## Running Tests
+Tests for puzzles are located in the **tests** directory. These test sample inputs provided as puzzle examples. Run tests using:
+
+```shell
+python -m unittest discover
+```

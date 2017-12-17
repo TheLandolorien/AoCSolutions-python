@@ -11,7 +11,7 @@ from app.models.Puzzle import Puzzle
 from app.models import db
 
 AOC_URL = 'http://adventofcode.com'
-DECEMBER = 12
+ADVENT = 12
 START_YEAR = 2015
 
 
@@ -50,7 +50,7 @@ class Scraper:
         if authenticated:
             for year in range(START_YEAR, self.today.year + 1):
                 for day in range(1, 26):
-                    completed = self.add_puzzle(date(year, DECEMBER, day))
+                    completed = self.add_puzzle(date(year, ADVENT, day))
                     if not completed:
                         break  # No more puzzles available
             db.session.remove()
