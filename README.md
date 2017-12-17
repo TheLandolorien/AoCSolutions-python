@@ -3,7 +3,9 @@ Python (3.6) solutions to Advent of Code Exercises.
 
 Solutions are served over Flask app and Puzzle information (titles and inputs) are stored in SQLite database via web scraper.
 
-The scrape only supports GitHub authentication.
+Source code for solutions can be found in `app/solutions/<year>/day_<day>.py`
+
+**NOTE**: Scraper only supports GitHub authentication.
 
 ## Getting Started
 

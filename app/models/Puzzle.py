@@ -1,4 +1,5 @@
 from datetime import datetime
+import sqlalchemy
 from app.models import db
 
 
@@ -38,4 +39,10 @@ class Puzzle(db.Model):
             puzzle_dates[puzzle_date.year].append(puzzle_date.day)
         return puzzle_dates
 
+    @staticmethod
+    def get_puzzle_input(puzzle_date):
+        result = db.session.query(Puzzle.input) \
+            .filter(Puzzle.date == puzzle_date) \
+            .first()
+        return result[0] if result else None
 

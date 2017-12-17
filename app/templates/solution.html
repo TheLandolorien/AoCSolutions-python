@@ -1,8 +1,11 @@
 {% extends "layout.html" %}
 {% block title %}Day {{ day }}: Advent of Code {{ year }}{% endblock %}
 {% block head %}
-  {{ super() }}
+{{ super() }}
 {% endblock %}
 {% block content %}
-    <p class="lead">AoC Solutions coming soon...</p>
+<h1>Part 1</h1>
+<p class="lead">{{ part_1_solution }}</p>
+<h1>Part 2</h1>
+<p class="lead">{{ part_2_solution }}</p>
 {% endblock %}
