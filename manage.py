@@ -1,6 +1,4 @@
 import os
-import click
-from datetime import datetime
 
 from flask_migrate import Migrate
 
@@ -8,7 +6,7 @@ from app import create_app
 from app.models import db
 from app.scraper import Scraper
 
-from app.models.Puzzle import Puzzle, Input
+from app.models.Puzzle import Puzzle
 
 app = create_app(os.getenv('FLASK_CONFIG', 'Development'))
 
@@ -19,9 +17,8 @@ migrate = Migrate(app, db)
 
 # Custom Commands
 @app.cli.command()
-@click.option('--year', default=datetime.today().year, help='Advent of Code Event Year')
-def scrape(year):
-    """Scrap Puzzles from Site"""
+def scrape():
+    """Scrap Puzzles from Site
+    """
     scraper = Scraper()
-    scraper.update(year)
-
+    scraper.scrape()

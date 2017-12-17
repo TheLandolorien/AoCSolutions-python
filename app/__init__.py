@@ -1,11 +1,15 @@
 import logging
 
 from flask import Flask
+from app.api import api
 
 
 def create_app(env):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='public')
     app.config.from_object('config.{}'.format(env))
+
+    # Register Blueprints
+    app.register_blueprint(api)
 
     # Logging Configuration
     logger = logging.getLogger(__name__)
