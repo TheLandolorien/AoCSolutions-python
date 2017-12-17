@@ -10,12 +10,26 @@ class Puzzle(db.Model):
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     input_id = db.Column(db.Integer, db.ForeignKey('input.id'))
-    input = db.relationship('Input', backref=db.backref('puzzle', lazy=True))
+    input = db.relationship('Input', backref=db.backref('puzzle', cascade='all, delete-orphan', lazy=True))
 
     db.UniqueConstraint('date', 'title', 'part_nbr', name='uix_puzzle')
 
     def __repr__(self):
         return '[Date={}, Puzzle={}, Part={}]'.format(Puzzle.date, Puzzle.title, Puzzle.part_nbr)
+
+    @staticmethod
+    def prepare(date, title, input_data):
+        existing_puzzles = db.session.query(Puzzle) \
+            .filter(Puzzle.date == date,
+                    Puzzle.title == title) \
+            .all()
+
+        for existing_puzzle in existing_puzzles:
+            db.session.delete(existing_puzzle)
+            db.session.commit()
+
+        input_id = db.session.query(Input.id).filter(Input.text == input_data).first()[0]
+        return Puzzle(date=date, title=title, input_id=input_id)
 
 
 class Input(db.Model):
@@ -26,3 +40,16 @@ class Input(db.Model):
 
     def __repr__(self):
         return '[Input={}, Text={}...]'.format(Input.id, Input.text[0:10])
+
+    @staticmethod
+    def prepare(text):
+        existing_inputs = db.session.query(Input) \
+            .filter(Input.text == text) \
+            .all()
+
+        for existing_input in existing_inputs:
+            db.session.delete(existing_input)
+            db.session.commit()
+
+        return Input(text=text)
+

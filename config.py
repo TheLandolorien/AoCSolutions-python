@@ -1,4 +1,5 @@
 import os
+import json
 
 from werkzeug import security
 
@@ -16,6 +17,13 @@ class Config:
 class Development(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(WORKING_DIR, 'data-dev.sqlite')
+    dev_config_path = 'config.json'
+
+    with open(dev_config_path) as json_file:
+        config = json.load(json_file)
+
+    GITHUB_USERNAME = config['GITHUB_USERNAME']
+
 
 
 class Predix(Config):

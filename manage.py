@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 
 from app import create_app
 from app.models import db
-from app.puzzle import Scraper
+from app.scraper import Scraper
 
 from app.models.Puzzle import Puzzle, Input
 
